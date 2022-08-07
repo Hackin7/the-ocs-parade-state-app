@@ -248,14 +248,14 @@ class ProcessingData {
         for (let index in radioOptions){
           try{
             let option = radioOptions[index].childNodes[1].childNodes[1].childNodes[1];
-            if (option.value == wing){
+            if (option.value == wing && !option.checked){
               option.click();
+              window.alert('Filled Up'); 
             }
           }catch (err){
             console.log(err);
           }
         }
-        window.alert('Filled Up'); 
       }, 2000);
     `;
   }
