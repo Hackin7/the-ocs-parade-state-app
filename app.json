@@ -24,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.uselessness.ocs_parade_state"
     },
     "web": {
       "favicon": "./assets/favicon.png"
