@@ -1,8 +1,25 @@
 # The OCS Parade State App
 
-I spent a weekend on this. Oh well at least I learnt how to automate things
+I spent a weekend on this. Oh well at least I learnt how to automate things.
+
+This is an App to automate the submission of a very specific form, to make it more convenient and easier.
+
+# Build Instructions
 
 `com.uselessness.ocs_parade_state`
+
+```
+expo publish
+eas build --profile production --platform android # Build APK
+```
+
+# Distribution
+
+Expo Go Links
+
+📝  Manifest: https://exp.host/@hackin7/snack-827eee0e-efa5-472f-a0be-a9723f4b2728 Learn more.
+
+⚙️   Project page: https://expo.dev/@hackin7/snack-827eee0e-efa5-472f-a0be-a9723f4b2728?serviceType=classic&distribution=expo-go Learn more.
 
 # Sample Snack app
 
@@ -15,18 +32,3 @@ All projects created in Snack are publicly available, so you can easily share th
 If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.io/c/snack).
 
 Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
-
-
-# Build Instructions
-
-```
-expo publish
-eas build --profile production --platform android # Build APK
-```
-
-# Distribution
-
-Expo Go Links
-
-📝  Manifest: https://exp.host/@hackin7/snack-827eee0e-efa5-472f-a0be-a9723f4b2728 Learn more.
-⚙️   Project page: https://expo.dev/@hackin7/snack-827eee0e-efa5-472f-a0be-a9723f4b2728?serviceType=classic&distribution=expo-go Learn more.
