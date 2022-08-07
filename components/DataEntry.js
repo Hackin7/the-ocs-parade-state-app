@@ -161,7 +161,6 @@ export default function DataEntry({navigation}){
         data={listData}
         renderItem={renderItem}
       />
-      <Text>{JSON.stringify(listData)}</Text>
     </View>
   );
 }
