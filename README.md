@@ -17,9 +17,9 @@ eas build --profile production --platform android # Build APK
 
 Expo Go Links
 
-📝  Manifest: https://exp.host/@saftirians/snack-827eee0e-efa5-472f-a0be-a9723f4b2728 Learn more.
+📝  Manifest: https://exp.host/@saftirians/ocs-parade-state Learn more.
 
-⚙️   Project page: https://expo.dev/@saftirians/snack-827eee0e-efa5-472f-a0be-a9723f4b2728?serviceType=classic&distribution=expo-go Learn more.
+⚙️   Project page: https://expo.dev/@saftirians/ocs-parade-state?serviceType=classic&distribution=expo-go Learn more.
 
 # Sample Snack app
 
