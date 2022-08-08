@@ -28,13 +28,13 @@ export default function Home({navigation}){
         width:windowWidth*0.7,
         textAlign:'center'
     }}>Submit Parade State faster than ever</Text>
-    
+    <View style={{padding:5}}></View>
     <Button onPress={()=>{navigation.navigate("DataEntry"), {}}} color="#696969"
       style={{ backgroundColor: "#696969"}}
       title='Modify Instructors' />
-
+    <View style={{padding:5}}></View>
     <Button onPress={()=>{navigation.navigate("Metadata")}} color="#696969" style={{ backgroundColor: "#696969", marginTop:50}} title='Metadata' />
-
+    <View style={{padding:5}}></View>
     <Button onPress={()=>{navigation.navigate("Form")}} color="#696969" style={{ backgroundColor: "#696969", marginTop:50}} title='Submit' />
 		</View>
 	);

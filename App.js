@@ -10,6 +10,7 @@ import DataEntry from './components/DataEntry.js';
 import Instructor from './components/Instructor.js';
 import Metadata from './components/Metadata.js';
 import Form from './components/Form.js';
+import DataManagement from './components/DataManagement.js';
 
 ////Components//////////////////////////////////////////////////////////
 
@@ -23,6 +24,7 @@ export default function App() {
         <Stack.Screen name="DataEntry" component={DataEntry} />
         <Stack.Screen name="Instructor" component={Instructor} />
         <Stack.Screen name="Metadata" component={Metadata} />
+        <Stack.Screen name="DataManagement" component={DataManagement} />
       </Stack.Navigator>
     </NavigationContainer>
   );

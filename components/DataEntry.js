@@ -10,7 +10,6 @@ import {
   Button, TextInput,
   TouchableOpacity} from 'react-native';
 import Checkbox from 'expo-checkbox';
-import { useSelector, useDispatch } from 'react-redux';
 import Storage from 'expo-storage';
 import { useIsFocused } from '@react-navigation/native';
 
@@ -47,21 +46,6 @@ function RandomCheckboxNeg({ onChange }){
   );
 }
 export default function DataEntry({navigation}){  
-	// Navigation ////////////////////////////////////
-  useEffect(() => {
-    navigation.setOptions({
-			headerRight: () => <Button onPress={()=>{
-        navigation.navigate("Instructor", {
-          'item': {"rank":"LTA", "name":"Runner", "service":"Regular", "personType":"Permstaff", isPresent:true},
-          'index':listData.length, 
-          'listData':listData,
-          'setListData': setListData,
-        });
-      }} style={{marginRight:50}} title="Add" />,
-		});
-  });
-  
-  
   //https://stackoverflow.com/questions/46504660/refresh-previous-screen-on-goback
   const isFocused = useIsFocused();
   useEffect(() => {
@@ -150,12 +134,20 @@ export default function DataEntry({navigation}){
   //// Main View ////////////////////////////////////////////////////////
   return (
     <View style={styles.container}>
-      {/**/}
-      <Button onPress={()=>{
-        saveData(format).then(()=>{
-          setListData(format);navigation.goBack();
-        });
-      }} title="Reset all Data" />  
+      <View style={{ flexDirection: "row", padding:10}}>
+          <Button style={{marginLeft:"100"}} onPress={()=>{
+             navigation.navigate("DataManagement", {setListData:setListData}) ;
+          }} title="Data Management" />   
+          <View style={{padding:10}}></View>
+          <Button onPress={()=>{
+            navigation.navigate("Instructor", {
+              'item': {"rank":"LTA", "name":"Runner", "service":"Regular", "personType":"Permstaff", isPresent:true},
+              'index':listData.length, 
+              'listData':listData,
+              'setListData': setListData,
+            });
+          }} style={{marginRight:50}} title="Add" />
+      </View>
       <FlatList
         style={{ width: "100%" }}
         data={listData}

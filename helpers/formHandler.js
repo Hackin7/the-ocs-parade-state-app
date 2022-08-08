@@ -235,12 +235,16 @@ class ProcessingData {
   }
 
   getScript(){
+    // https://stackoverflow.com/questions/53628112/fill-angular-input-using-javascript
     return `
       setTimeout(function() {
+        const event = new Event('input', { bubbles: true }); 
         const data = ${JSON.stringify(this.getFormData())};
         const wing = "${this.metadata.wing}";
         for (let id in data){
-          document.getElementById(id).value = data[id];
+          let element = document.getElementById(id);
+          element.value = data[id] !== "" ? data[id] : null; // Set as null to cause an error message
+          element.dispatchEvent(event);
         }
 
         //document.getElementById("radio611ca80d3d48c70012444eb7").childNodes[6*2].childNodes[1].childNodes[1].childNodes[1].click();
