@@ -15,25 +15,23 @@ import Storage from 'expo-storage';
 
 let statuses = [
     "",
-    "Leave",
-    "Medical Leave",
-    "Medical Appointment",
+    "Duty", 
     "Day Off",
+    "Leave(Local/Overseas)",
     "Reporting Sick",
+    "Medical Leave",
+    "Medical/Dental Appointment",
     "Hospitalised/Sick Bay",
-    "Attached Out",
-    "Course/Seminar/Briefing",
     "Child Sick Leave",
-    "AWOL",
-    "Civil Custody",
-    "Close Arrest",
-    "Detention",
+    "Course/Seminar/Briefing",
     "Field Exercise",
     "Overseas Exercise",
-    "Others",
-    "Tekong Exercise",
-    "Ops Room Duty",
-    "Personnel Duty"
+    "AWOL",
+    "Close Arrest",
+    "Detention",
+    "Civil Custody",
+    "Attached Out",
+    "Others"
 ]
 const fields = [
   {"name":"Rank", "key":"rank"},

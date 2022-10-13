@@ -1,4 +1,23 @@
 // Sample Data ////////////////////////////////////////////////////////
+const status_ids = {
+  "Duty": "614b75e8f040a20012147d1e", 
+  "Day Off": "614b75748c982c0012820262",
+  "Leave(Local/Overseas)": "614b72f734212a0012404ef0",
+  "Reporting Sick": "614b7580502471001253e99a",
+  "Medical Leave": "614b74d6502471001253e74d",
+  "Medical/Dental Appointment": "614b756baa176500124fb1de",
+  "Hospitalised/Sick Bay": "614b7589f040a20012147b52",
+  "Child Sick Leave": "614b75a067e69e0012766202",
+  "Course/Seminar/Briefing": "614b75988eaf060012171124",
+  "Field Exercise": "614b75c68eaf06001217129c",
+  "Overseas Exercise": "614b75cd92710b00126c43af",
+  "AWOL": "614b75a58eaf0600121711a0",
+  "Close Arrest": "614b75b88eaf060012171214",
+  "Detention": "614b75bfaa176500124fb2ea",
+  "Civil Custody": "614b75b2f040a20012147c09",
+  "Attached Out": "614b7590aa176500124fb252",
+  "Others": "614b75d48c982c00128203ca",
+};
 const web_form_id = {
 	"name_rank": '612484e7969acc0012a0615f', 
 	"og_permstaff_total": "612486e193d3b90012305a04-7",
@@ -17,50 +36,9 @@ const web_form_id = {
 	"curr_cadet_nsf": "61248879c6ae9a00125d8259-12",
 	"curr_cadet_io": "61248879c6ae9a00125d825b-13",
 
-	"personnel_leave": "614b72f734212a0012404ef0",
-	"personnel_mc": "614b74d6502471001253e74d",
-	"personnel_ma": "614b756baa176500124fb1de",
-	"personnel_off": "614b75748c982c0012820262",
-	"personnel_report_sick": "614b7580502471001253e99a",
-	"personnel_hospital_sick_bay": "614b7589f040a20012147b52",
-	"personnel_attach_out": "614b7590aa176500124fb252",
-	"personnel_course_seminar_briefing": "614b75988eaf060012171124",
-	"personnel_child_sick_leave": "614b75a067e69e0012766202",
-	"personnel_awol": "614b75a58eaf0600121711a0",
-	"personnel_civil_custody": "614b75b2f040a20012147c09",
-	"personnel_close_arrest": "614b75b88eaf060012171214",
-	"personnel_detention": "614b75bfaa176500124fb2ea",
-	"personnel_field_exercise": "614b75c68eaf06001217129c",
-	"personnel_overseas_exercise": "614b75cd92710b00126c43af",
-	"personnel_others": "614b75d48c982c00128203ca",
-	"personnel_tekong_exercise": "614b75daaa176500124fb3e0",
-	"personnel_ops_room_duty": "614b75e192710b00126c4456",
-	"personnel_duty": "614b75e8f040a20012147d1e",
-	"comment": "612485ff93d3b90012303ea5",
+  ...status_ids,
+	"Comment": "612485ff93d3b90012303ea5",
 };
-
-
-const data_key_conversion = {
-    "Leave":"personnel_leave",
-    "Medical Leave": "personnel_mc",
-    "Medical Appointment": "personnel_ma",
-    "Day Off": "personnel_off",
-    "Reporting Sick": "personnel_report_sick",
-    "Hospitalised/Sick Bay": "personnel_hospital_sick_bay",
-    "Attached Out": "personnel_attach_out",
-    "Course/Seminar/Briefing": "personnel_course_seminar_briefing",
-    "Child Sick Leave": "personnel_child_sick_leave",
-    "AWOL": "personnel_awol",
-    "Civil Custody": "personnel_civil_custody",
-    "Close Arrest": "personnel_close_arrest",
-    "Detention": "personnel_detention",
-    "Field Exercise": "personnel_field_exercise",
-    "Overseas Exercise": "personnel_overseas_exercise",
-    "Others": "personnel_others",
-    "Tekong Exercise": "personnel_tekong_exercise",
-    "Ops Room Duty": "personnel_ops_room_duty",
-    "Personnel Duty": "personnel_duty"
-}
 
 function form_data_starter(){
     return {
@@ -81,26 +59,7 @@ function form_data_starter(){
         "curr_cadet_nsf": 0,
         "curr_cadet_io": 0,
         
-        "personnel_leave": "",
-        "personnel_mc": "",
-        "personnel_ma": "",
-        "personnel_off": "",
-        "personnel_report_sick": "",
-        "personnel_hospital_sick_bay": "",
-        "personnel_attach_out": "",
-        "personnel_course_seminar_briefing": "",
-        "personnel_child_sick_leave": "",
-        "personnel_awol": "",
-        "personnel_civil_custody": "",
-        "personnel_close_arrest": "",
-        "personnel_detention": "",
-        "personnel_field_exercise": "",
-        "personnel_overseas_exercise": "",
-        "personnel_others": "",
-        "personnel_tekong_exercise": "",
-        "personnel_ops_room_duty": "",
-        "personnel_duty": "",
-        "comment": "",
+        "Comment": "",
     }
 }
 
@@ -179,17 +138,18 @@ class ProcessingData {
 
   // Unpacking to Form Inputs //////////////////////////////////////////////////
   status_unpacking() {
-    var template;
-
-    for (let key in this.statuses) {
-      template = "";
-
+    for (let key in status_ids) {
+      if (!key) continue;
+      
+      let template = "";
       for (let rank in this.statuses[key]) {
         template += '\n' + `${this.statuses[key][rank]} ${rank}`;
       }
-
-      this.form_data[data_key_conversion[key]] = template.trim();
+      if (template === ""){ template = "0"; }
+      
+      this.form_data[key] = template.trim();
     }
+    console.log(this.form_data);
   }
 
   collateData() {
@@ -221,6 +181,8 @@ class ProcessingData {
       this.status_simplified("OCT", "Medical Leave");
     }
     this.status_unpacking();
+    
+    this.form_data["Comment"] = "NIL";
   }
 
   // Data to Web Form Element ///////////////////////////////////
@@ -237,14 +199,19 @@ class ProcessingData {
   getScript(){
     // https://stackoverflow.com/questions/53628112/fill-angular-input-using-javascript
     return `
-      setTimeout(function() {
+      function run() {
         const event = new Event('input', { bubbles: true }); 
         const data = ${JSON.stringify(this.getFormData())};
         const wing = "${this.metadata.wing}";
         for (let id in data){
-          let element = document.getElementById(id);
-          element.value = data[id] !== "" ? data[id] : null; // Set as null to cause an error message
-          element.dispatchEvent(event);
+          if (id == "undefined"){ continue; }
+          try{
+            let element = document.getElementById(id);
+            element.value = data[id] !== "" ? data[id] : null; // Set as null to cause an error message
+            element.dispatchEvent(event);
+          } catch (err) {
+            alert("Text Filling Error: "+err + ", " + id + ", " + document.getElementById(id));
+          }
         }
 
         //document.getElementById("radio611ca80d3d48c70012444eb7").childNodes[6*2].childNodes[1].childNodes[1].childNodes[1].click();
@@ -257,9 +224,13 @@ class ProcessingData {
               window.alert('Filled Up'); 
             }
           }catch (err){
-            console.log(err);
+            console.log("Wing Selection Error: "+err);
           }
         }
+      }
+      setTimeout(function(){
+        try {run();}
+        catch (err) {alert("App Error: "+err);}
       }, 2000);
     `;
   }
