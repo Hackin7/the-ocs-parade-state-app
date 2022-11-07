@@ -210,7 +210,7 @@ class ProcessingData {
             element.value = data[id] !== "" ? data[id] : null; // Set as null to cause an error message
             element.dispatchEvent(event);
           } catch (err) {
-            alert("Text Filling Error: "+err + ", " + id + ", " + document.getElementById(id));
+            //alert("Text Filling Error: "+err + ", " + id + ", " + document.getElementById(id));
           }
         }
 
@@ -230,7 +230,9 @@ class ProcessingData {
       }
       setTimeout(function(){
         try {run();}
-        catch (err) {alert("App Error: "+err);}
+        catch (err) {
+          //alert("App Error: "+err);
+        }
       }, 2000);
     `;
   }
